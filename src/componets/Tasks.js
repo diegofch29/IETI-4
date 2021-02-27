@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from './Task';
-import aDrawer from "./Drawer";
+import ADrawer from "./ADrawer";
 import {Grid,Paper} from '@material-ui/core';
 
 const Tasks = (props) => {
@@ -11,7 +11,7 @@ const Tasks = (props) => {
         <Grid>
         <Paper elevation={10} style={paperStyle}>
         <div>
-            <aDrawer />
+            <ADrawer />
             {props.items.map((item,i) => {
                 return (<Task key={i}
                               responsible={item.responsible}

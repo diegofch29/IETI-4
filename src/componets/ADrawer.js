@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,11 +12,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
 
-
-const aDrawer=(props)=> {
-        
-        
-        const useStyles = makeStyles({
+const useStyles = makeStyles({
   list: {
     width: 250,
   },
@@ -24,8 +20,13 @@ const aDrawer=(props)=> {
     width: 'auto',
   },
 });
+
+
+const  ADrawer=()=> {
+    
+    
   const classes = useStyles;
-  const [state, setState] = React.UseState({
+  const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
@@ -41,36 +42,35 @@ const aDrawer=(props)=> {
 
     setState({ ...state, [anchor]: open });
   };
-  
+
   const list = (anchor) => (
     <div
-      className="something"
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem button key={"Options"}>
+            <ListItemIcon>{2 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={"Options"} />
           </ListItem>
-        ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+          <ListItem button key={"Log out"}>
+            <ListItemIcon>{2  ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary="Log out" />
           </ListItem>
-        ))}
       </List>
     </div>
   );
 
   return (
     <div>
+        <Button onClick={toggleDrawer("left", true)} variant='outlined' color='primary'  align='left'>Menu</Button>
           <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)}>
             {list("left")}
           </Drawer>
@@ -78,5 +78,5 @@ const aDrawer=(props)=> {
   );
 };
 
-export default Drawer;
+export default ADrawer;
 
