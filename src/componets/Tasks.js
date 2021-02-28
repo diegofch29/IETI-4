@@ -22,7 +22,7 @@ const Tasks = (props) => {
                               dueDate={item.dueDate}/>
                 );
             })}
-            <Fab color="primary" aria-label="add" align="right" inClick={addition}><AddIcon /></Fab> 
+            <Fab color="primary" aria-label="add" align="right" onClick={props.addition}><AddIcon /></Fab> 
         </div>
                        
         </Paper>

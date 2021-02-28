@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './componets/Login.js';
 import Tasks from './componets/Tasks.js';
+import Addition from './componets/Addition.js';
+import Registration from './componets/Registration.js';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
 function App() {
@@ -63,7 +65,7 @@ function App() {
         localStorage.setItem("isLoggedIn", false);
         window.location.href = "/";
     };
-    const handleaddition= () =>{
+    const handleAddition= () =>{
         window.location.href = "/adition";
     }
     
@@ -71,14 +73,17 @@ function App() {
     
     
     const LoginView = () => (<Login successfully={handleSuccessfullyLogin} failed={handleFailedLogin}/>);
-    const HomeView = () => (<Tasks items={items} logout={handleLogout} email={userData.email} name={userData.username} addition={handleaddition}/>);
-    
+    const HomeView = () => (<Tasks items={items} logout={handleLogout} email={userData.email} name={userData.username} addition={handleAddition}/>);
+    const AdditionView = () => (<Addition/>)
+    const RegistrationView= () =>(<Registration/>)
     
     return (
           <Router>
             <div className="App">
                 <Route exact path="/" component={LoginView}/>
                 <Route path="/home" component={HomeView}/>
+                <Route path="/addition" component={AdditionView}/>
+                <Route path="/registration" component={RegistrationView}/>      
             </div>
         </Router>
   );
