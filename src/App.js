@@ -63,12 +63,15 @@ function App() {
         localStorage.setItem("isLoggedIn", false);
         window.location.href = "/";
     };
+    const handleaddition= () =>{
+        window.location.href = "/adition";
+    }
     
     
     
     
     const LoginView = () => (<Login successfully={handleSuccessfullyLogin} failed={handleFailedLogin}/>);
-    const HomeView = () => (<Tasks items={items} logout={handleLogout} email={userData.email} name={userData.username}/>);
+    const HomeView = () => (<Tasks items={items} logout={handleLogout} email={userData.email} name={userData.username} addition={handleaddition}/>);
     
     
     return (

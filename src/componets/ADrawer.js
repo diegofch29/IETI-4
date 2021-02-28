@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 
 
-const  ADrawer=()=> {
+const  ADrawer=(props)=> {
     
     
   const classes = useStyles;
@@ -53,14 +53,14 @@ const  ADrawer=()=> {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-          <ListItem button key={"Options"}>
+          <ListItem button key={"Options"} >
             <ListItemIcon>{2 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={"Options"} />
           </ListItem>
       </List>
       <Divider />
       <List>
-          <ListItem button key={"Log out"}>
+          <ListItem button key={"Log out"}  onClick={props.logout}>  
             <ListItemIcon>{2  ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItem>
