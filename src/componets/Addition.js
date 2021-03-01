@@ -8,6 +8,7 @@ const Addition =()=>{
     
     return(
             <Paper elevation={10} style={paperStyle}>
+                <h1>New Task</h1>
                 <form>
                 <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="Description">Description</InputLabel>
@@ -23,10 +24,11 @@ const Addition =()=>{
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="Date">Date</InputLabel>
-                        <Input id="date" name="date"  autoFocus  />
+                        <Input id="date" name="date" type='date' autoFocus  />
                 </FormControl>
                 </form>
                  <Button  type='submit' fullWidth variant='outlined' color='primary'  align='center' style={{margin:'20px auto'}}>Summit</Button>
+                         <Fab color="primary" aria-label="add" align="right" ><AddIcon /></Fab>
             </Paper>
     );
 };

@@ -66,7 +66,7 @@ function App() {
         window.location.href = "/";
     };
     const handleAddition= () =>{
-        window.location.href = "/adition";
+        window.location.href = "/addition";
     }
     
     
