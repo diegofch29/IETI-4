@@ -32,9 +32,11 @@ const Login=(props)=>{
             props.failed();
         }
     };
-    const Register=()=>{
+    
+    const hadleRedirect=()=>{
         window.location.href = "/registration";
     }
+    
     
     return(
             <Grid>
@@ -54,7 +56,7 @@ const Login=(props)=>{
                                 <Input id="passwd" name="Password" autoFocus type='Password' onChange={handlePasswordChanges}/>
                             </FormControl>
                         <Button  type='submit' fullWidth variant='outlined' color='primary'  align='center' style={{margin:'20px auto'}}>Sign in</Button>
-                        <Button  fullWidth variant='outlined' color='primary'  align='center' onClick={Register}>Sign up</Button>
+                        <Button  fullWidth variant='outlined' color='primary'  align='center' onClick={hadleRedirect}>Register</Button>
                         </form>
                 </Paper>
             </Grid>

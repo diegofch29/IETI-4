@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './componets/Login.js';
 import Tasks from './componets/Tasks.js';
-import Addition from './componets/Addition.js';
 import Registration from './componets/Registration.js';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
 function App() {
-    const userData = {
-        userName : "diego@gmail.com",
+    let userData = {
+        name : "diego",
+        email: "diego@gmail.com",
         password : "1234"
     };
     
@@ -38,11 +38,20 @@ function App() {
   	"status": "Almost",
   	"dueDate": 156464645648}];
     
+    const [itemsState,setItems]=useState(items);
+    const [userInfo,setUser]=useState(userData);
     
-    localStorage.setItem("Username", userData.userName);
-    localStorage.setItem("Password", userData.password);
+    
     localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("items", JSON.stringify(items));
     
+    
+    function setUserData(){
+        localStorage.setItem("Username", userData.name);
+        localStorage.setItem("Password", userData.password);
+    }
+    
+    setUserData();
     let isLoggedIn = false;
     
     const [isLoggedInValue,setIsLoggedIn]=useState(isLoggedIn);
@@ -65,24 +74,32 @@ function App() {
         localStorage.setItem("isLoggedIn", false);
         window.location.href = "/";
     };
-    const handleAddition= () =>{
-        window.location.href = "/addition";
+    
+    
+    const handleAddition= (newTask) =>{
+        setItems(itemsState => [...itemsState,newTask]);
+    };
+    
+    const handleRegistration = (newUser) => {
+        window.location.href = "/";
+        userData = newUser;
+        setUser();
+        console.log(newUser);
+        alert();
+        setUserData();
     }
     
     
     
-    
     const LoginView = () => (<Login successfully={handleSuccessfullyLogin} failed={handleFailedLogin}/>);
-    const HomeView = () => (<Tasks items={items} logout={handleLogout} email={userData.email} name={userData.username} addition={handleAddition}/>);
-    const AdditionView = () => (<Addition/>)
-    const RegistrationView= () =>(<Registration/>)
+    const HomeView = () => (<Tasks items={itemsState} logout={handleLogout} addition={handleAddition}/>);
+    const RegistrationView= () =>(<Registration register={handleRegistration}/>)
     
     return (
           <Router>
             <div className="App">
                 <Route exact path="/" component={LoginView}/>
                 <Route path="/home" component={HomeView}/>
-                <Route path="/addition" component={AdditionView}/>
                 <Route path="/registration" component={RegistrationView}/>      
             </div>
         </Router>
