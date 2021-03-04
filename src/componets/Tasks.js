@@ -4,17 +4,24 @@ import ADrawer from "./ADrawer";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {Grid,Paper,Dialog} from '@material-ui/core';
-import Addition from './Addition.js';
+import Addition from './NewTask.js';
 
 const Tasks = (props) => {
     
     const paperStyle = {padding:20, width:720, margin:"50px auto"};
     
+    const [status, setStatus] = useState("");
+    const [responsible, setResponsible] = useState("");
+    const [date, setDate] = useState(null);
     
+    
+    let taskList = props.items;
+    
+    console.log(taskList);
     
     const [open,setOpen] = useState(false);
     
-    console.log(props.items);
+    
     
     const handleAddition=(task)=>{
         props.addition(task);
@@ -25,12 +32,43 @@ const Tasks = (props) => {
         setOpen(!open); 
     };
     
+    const handleUpdateProfile=()=>{
+        window.location.href = "/UserProfile";
+    };
+    
+    const handleFilters=(nstatus,nresponsible,ndate)=>{
+        setStatus(nstatus);
+        setResponsible(nresponsible);
+        setDate(ndate);
+    }
+    
+    if (status!==""){
+        taskList = taskList.filter(item => item.status === status);
+    }
+    
+    if (responsible!==""){
+        taskList = taskList.filter(item => item.responsible === responsible);
+    }
+    
+    
+    if (date!==null){
+        taskList = taskList.filter(item => item.dueDate === date);
+    }
+    
+    console.log(status);
+    console.log(date);
+    console.log(responsible);
+    console.log(taskList);
+    
+    
+    
+    
     return (
         <Grid>
-        <Paper elevation={10} style={paperStyle} visible={false}>
+        <Paper elevation={10} style={paperStyle} >
         <div>
-            <ADrawer logout={props.logout}/>
-            {props.items.map((item,i) => {
+            <ADrawer logout={props.logout} update={handleUpdateProfile} filter={handleFilters}/>
+            {taskList.map((item,i) => {
                 return (<Task key={i}
                               responsible={item.responsible}
                               description={item.description}
@@ -45,6 +83,8 @@ const Tasks = (props) => {
             <Addition addition={handleAddition}/>
         </Dialog>
         </Grid>
+        
+        
     );
 };
 

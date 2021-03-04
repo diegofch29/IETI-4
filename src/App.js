@@ -3,15 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './componets/Login.js';
 import Tasks from './componets/Tasks.js';
-import Registration from './componets/Registration.js';
+import UserProfile from './componets/UserProfile.js';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 
-function App() {
+const  App=()=> {
     let userData = {
         name : "diego",
         email: "diego@gmail.com",
         password : "1234"
     };
+    
+    if (localStorage.getItem("Usename")===null){  
+        console.log("-----------------------WHY");
+        localStorage.setItem("Password", userData.password);
+        localStorage.setItem("Username", userData.name);
+    }
     
     const items=[{"description": "Work",
                    "status": "In progress",
@@ -39,19 +45,16 @@ function App() {
   	"dueDate": 156464645648}];
     
     const [itemsState,setItems]=useState(items);
-    const [userInfo,setUser]=useState(userData);
     
     
     localStorage.setItem("isLoggedIn", false);
     localStorage.setItem("items", JSON.stringify(items));
     
+    console.log(localStorage.getItem("Usename"));
     
-    function setUserData(){
-        localStorage.setItem("Username", userData.name);
-        localStorage.setItem("Password", userData.password);
-    }
     
-    setUserData();
+    
+    
     let isLoggedIn = false;
     
     const [isLoggedInValue,setIsLoggedIn]=useState(isLoggedIn);
@@ -81,26 +84,23 @@ function App() {
     };
     
     const handleRegistration = (newUser) => {
-        window.location.href = "/";
-        userData = newUser;
-        setUser();
-        console.log(newUser);
+        const userData = newUser;
         alert();
-        setUserData();
+        window.location.href = "/home";
     }
     
     
     
     const LoginView = () => (<Login successfully={handleSuccessfullyLogin} failed={handleFailedLogin}/>);
     const HomeView = () => (<Tasks items={itemsState} logout={handleLogout} addition={handleAddition}/>);
-    const RegistrationView= () =>(<Registration register={handleRegistration}/>)
+    const UserProfileView= () =>(<UserProfile register={handleRegistration}/>)
     
     return (
           <Router>
             <div className="App">
                 <Route exact path="/" component={LoginView}/>
                 <Route path="/home" component={HomeView}/>
-                <Route path="/registration" component={RegistrationView}/>      
+                <Route path="/UserProfile" component={UserProfileView}/>      
             </div>
         </Router>
   );

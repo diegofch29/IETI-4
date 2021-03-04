@@ -5,7 +5,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 
-const Registration =(props)=>{
+const UserProfile =(props)=>{
     const paperStyle = {padding:20, height:'70vh', width:280, margin:"50px auto"};
     
     const [fullName, setFullName] = useState("");
@@ -77,4 +77,4 @@ const Registration =(props)=>{
     );
 };
 
-export default Registration;
+export default UserProfile;
